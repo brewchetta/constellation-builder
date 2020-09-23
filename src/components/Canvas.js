@@ -1,17 +1,25 @@
 import React, { useState } from 'react'
+
 import CurrentPoint from './CurrentPoint'
 import Line from './Line'
 import Point from './Point'
 
-const minDist = 20
+import { useSelector, useDispatch } from 'react-redux'
+import { setCurrentPoint, clearCurrentPoint } from '../redux/actions'
 
 function Canvas() {
+
+  // State
+
+  const dispatch = useDispatch()
+
+  const currentPoint = useSelector(s => s.currentPoint)
+
+  const minDist = useSelector(s => s.minDist)
 
   const [points, setPoints] = useState([])
 
   const [lines, setLines] = useState([])
-
-  const [currentPoint, setCurrentPoint] = useState({})
 
   const [undoStack, setUndoStack] = useState([])
 
@@ -19,7 +27,7 @@ function Canvas() {
 
   const addPoint = (x,y) => {
     setPoints([...points, {x,y}])
-    setCurrentPoint({})
+    dispatch(clearCurrentPoint())
     setUndoStack([...undoStack, "point"])
     return {x,y}
   }
@@ -68,7 +76,7 @@ function Canvas() {
   const handleKeyPress = (e) => {
     if (e.keyCode === 90) {
       !currentPoint.x && undo()
-      setCurrentPoint({})
+      dispatch(clearCurrentPoint())
     }
     e.keyCode === 88 && console.log(undoStack)
   }
@@ -92,8 +100,8 @@ function Canvas() {
     if (point.x === x && point.y === y) {
       setCurrentPoint({})
     } else {
-      !x && setCurrentPoint(point)
-      x && addLine(point) && setCurrentPoint(point)
+      !x && dispatch(setCurrentPoint(point))
+      x && addLine(point) && dispatch(setCurrentPoint(point))
     }
   }
 
