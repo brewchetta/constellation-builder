@@ -6,15 +6,23 @@ function Canvas() {
 
   const [points, setPoints] = useState([])
 
+  const [currentPoint, setCurrentPoint] = useState({})
+
   const handleClick = (e) => {
     const x = e.clientX
     const y = e.clientY
-    setPoints([...points, {x,y}])
+    if (!points.find(p => Math.abs(p.x - x) < 10 && Math.abs(p.y - y) < 10)) {
+      setPoints([...points, {x,y}])
+      setCurrentPoint({})
+    }
   }
 
+  const handlePointClick = (point) => {
+    setCurrentPoint(point)
+  }
 
   const displayPoints = () => {
-    return points.map((point,i) => <Point key={i} point={point} />)
+    return points.map((point,i) => <Point key={i} handlePointClick={handlePointClick} point={point} />)
   }
 
   const displayLines = () => {
@@ -26,6 +34,8 @@ function Canvas() {
 
   return (
     <div id="canvas" onClick={handleClick}>
+
+      <span style={{color: 'white'}}>currentPoint: {currentPoint.x}, {currentPoint.y}</span>
 
       {displayPoints()}
       {displayLines()}
