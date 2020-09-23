@@ -1,7 +1,9 @@
-import { SET_CURRENT_POINT, CLEAR_CURRENT_POINT } from './actionTypes'
+import { SET_CURRENT_POINT, CLEAR_CURRENT_POINT, SET_LINES, SET_POINTS } from './actionTypes'
 
 const initialState = {
   currentPoint: {},
+  points: [],
+  lines: [],
   minDist: 20
 }
 
@@ -11,6 +13,10 @@ export default function(state = initialState, action) {
       return {...state, currentPoint: action.payload}
     case CLEAR_CURRENT_POINT:
       return {...state, currentPoint: {}}
+    case SET_POINTS:
+      return {...state, points: action.payload}
+    case SET_LINES:
+      return {...state, lines: action.payload}
     default:
       return state
   }

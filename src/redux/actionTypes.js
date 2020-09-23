@@ -1,2 +1,4 @@
 export const SET_CURRENT_POINT = "SET_CURRENT_POINT"
 export const CLEAR_CURRENT_POINT = "CLEAR_CURRENT_POINT"
+export const SET_LINES = "SET_LINES"
+export const SET_POINTS = "SET_POINTS"
