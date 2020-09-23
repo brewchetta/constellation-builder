@@ -1,7 +1,7 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 import { useSelector, useDispatch } from 'react-redux'
-import { setCurrentPoint } from '../redux/actions'
+import { clearCurrentPoint, setPoints } from '../redux/actions'
 
 function InfoDisplay() {
 
@@ -11,24 +11,25 @@ function InfoDisplay() {
 
   const currentPoint = useSelector(s => s.currentPoint)
 
-  const [nameOpen, setNameOpen] = useState(false)
+  const points = useSelector(s => s.points)
 
-  const [descOpen, setDescOpen] = useState(false)
+  const [name, setName] = useState(currentPoint.name || "")
 
-  const [name, setName] = useState('')
+  const [desc, setDesc] = useState(currentPoint.description || "")
 
-  const [desc, setDesc] = useState('')
+  // Effects
+
+  useEffect(() => {
+    setName(currentPoint.name || "")
+    setDesc(currentPoint.description || "")
+  }, [currentPoint])
 
   // Event Handlers
 
-  const handleUnfocus = ({target}) => {
-    if (target.id === "info-name") {
-      dispatch(setCurrentPoint({...currentPoint, name: target.value}))
-      setNameOpen(!nameOpen)
-    } else if (target.id === "info-description") {
-      dispatch(setCurrentPoint({...currentPoint, description: target.value}))
-      setDescOpen(!descOpen)
-    }
+  const handleSave = () => {
+    const newPoints = points.map(p => p === currentPoint ? {...currentPoint, name, description: desc} : p)
+    dispatch(setPoints(newPoints))
+    dispatch(clearCurrentPoint())
   }
 
   // Render
@@ -38,21 +39,15 @@ function InfoDisplay() {
 
       <p id="info-point">Current Point: {currentPoint.x}, {currentPoint.y}</p>
 
-      { nameOpen
-        ? <input id="info-name"
+      <input id="info-name"
         onChange={(e) => setName(e.target.value)}
-        onBlur={handleUnfocus}
         type="text" value={name} />
-        : <h3 id="info-name" onClick={() => setNameOpen(!nameOpen)}>Name: {currentPoint.name}</h3>
-      }
 
-      { descOpen
-        ? <input id="info-description"
+      <textarea id="info-description"
         onChange={(e) => setDesc(e.target.value)}
-        onBlur={handleUnfocus}
-        type="text" value={desc} />
-        :<p id="info-description" onClick={() => setDescOpen(!descOpen)}> Description: {currentPoint.description}</p>
-      }
+        value={desc} />
+
+      <button type="button" onClick={handleSave}>Save</button>
 
     </div>
   )
