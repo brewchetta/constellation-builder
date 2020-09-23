@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
-import Point from './Point'
+import CurrentPoint from './CurrentPoint'
 import Line from './Line'
+import Point from './Point'
 
 const minDist = 20
 
@@ -104,6 +105,8 @@ function Canvas() {
     tabIndex="0">
 
       {currentPoint.x ? <span style={{color: 'white'}}>currentPoint: {currentPoint.x}, {currentPoint.y}</span> : null}
+
+      {currentPoint.x ? <CurrentPoint currentPoint={currentPoint} /> : null}
 
       {displayPoints()}
       {displayLines()}
