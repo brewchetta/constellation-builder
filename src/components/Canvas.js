@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 
 import CurrentPoint from './CurrentPoint'
 import Line from './Line'
@@ -22,6 +22,10 @@ function Canvas() {
   const [lines, setLines] = useState([])
 
   const [undoStack, setUndoStack] = useState([])
+
+  // Refs
+
+  const canvasEl = useRef(null)
 
   // Add elements
 
@@ -73,6 +77,13 @@ function Canvas() {
 
   // Event handlers
 
+  const getPositionOnCanvas = (e) => {
+    return {
+      x: e.clientX - canvasEl.current.getBoundingClientRect().left,
+      y: e.clientY - canvasEl.current.getBoundingClientRect().top
+    }
+  }
+
   const handleKeyPress = (e) => {
     if (e.keyCode === 90) {
       !currentPoint.x && undo()
@@ -82,8 +93,7 @@ function Canvas() {
   }
 
   const handleClick = (e) => {
-    const x = e.clientX
-    const y = e.clientY
+    const {x,y} = getPositionOnCanvas(e)
     const pointNearby = points.find(p => Math.abs(p.x - x) < minDist && Math.abs(p.y - y) < minDist)
     if (!pointNearby && !currentPoint.x) {
       addPoint(x,y)
@@ -119,6 +129,7 @@ function Canvas() {
     <div id="canvas"
     onClick={handleClick}
     onKeyDown={handleKeyPress}
+    ref={canvasEl}
     tabIndex="0">
 
       {currentPoint.x ? <CurrentPoint currentPoint={currentPoint} /> : null}

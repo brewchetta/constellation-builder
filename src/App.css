@@ -5,12 +5,21 @@
   to {transform: rotate(360deg);}
 }
 
+/* Info Display */
+
+#info-display {
+  position: relative;
+  display: grid;
+  grid-template-rows: 1fr 1fr 1fr;
+}
+
 /* Canvas */
 
 #canvas {
   background: black;
   border: solid #ADD8E6 2px;
   height: 500px;
+  position: relative;
   width: 500px;
 }
 
