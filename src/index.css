@@ -7,7 +7,32 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+/* Canvas */
+
+#canvas {
+  background: black;
+  border: solid #ADD8E6 2px;
+  height: 500px;
+  width: 500px;
+}
+
+/* Line */
+
+.line {
+  color: #ADD8E6;
+}
+
+/* Point */
+
+.point-center {
+  position: absolute;
+}
+
+.point-display {
+  border: solid #ADD8E6 1px;
+  height: 5px;
+  left: -3px;
+  position: absolute;
+  top: -3px;
+  width: 5px;
 }
