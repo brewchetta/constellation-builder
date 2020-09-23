@@ -12,11 +12,15 @@ function Canvas() {
 
   const [currentPoint, setCurrentPoint] = useState({})
 
+  const [stackTypes, setStackTypes] = useState([])
+
   // Add elements
 
   const addPoint = (x,y) => {
     setPoints([...points, {x,y}])
     setCurrentPoint({})
+    setStackTypes([...stackTypes, "point"])
+    return {x,y}
   }
 
 
@@ -25,12 +29,15 @@ function Canvas() {
       p1: {x: currentPoint.x, y: currentPoint.y},
       p2: {x,y}
     }])
+    currentPoint && setStackTypes([...stackTypes, "line"])
+    return { p1: {x: currentPoint.x, y: currentPoint.y}, p2: {x,y} }
   }
 
   // Event handlers
 
   const handleKeyPress = (e) => {
-    debugger
+    console.log(e.keyCode)
+    e.keyCode == 90 &&
   }
 
   const handleClick = (e) => {
@@ -51,8 +58,7 @@ function Canvas() {
       setCurrentPoint({})
     } else {
       !x && setCurrentPoint(point)
-      x && addLine(point)
-      x && setCurrentPoint(point)
+      x && addLine(point) && setCurrentPoint(point)
     }
   }
 
