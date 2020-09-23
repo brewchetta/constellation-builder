@@ -12,16 +12,25 @@ function Canvas() {
 
   const [currentPoint, setCurrentPoint] = useState({})
 
+  // Add elements
+
   const addPoint = (x,y) => {
     setPoints([...points, {x,y}])
     setCurrentPoint({})
   }
+
 
   const addLine = ({x,y}) => {
     currentPoint && setLines([...lines, {
       p1: {x: currentPoint.x, y: currentPoint.y},
       p2: {x,y}
     }])
+  }
+
+  // Event handlers
+
+  const handleKeyPress = (e) => {
+    debugger
   }
 
   const handleClick = (e) => {
@@ -47,6 +56,8 @@ function Canvas() {
     }
   }
 
+  // Render components
+
   const displayPoints = () => {
     return points.map((point,i) => <Point key={i} handlePointClick={handlePointClick} point={point} />)
   }
@@ -56,7 +67,10 @@ function Canvas() {
   }
 
   return (
-    <div id="canvas" onClick={handleClick}>
+    <div id="canvas"
+    onClick={handleClick}
+    onKeyDown={handleKeyPress}
+    tabIndex="0">
 
       {currentPoint.x ? <span style={{color: 'white'}}>currentPoint: {currentPoint.x}, {currentPoint.y}</span> : null}
 
