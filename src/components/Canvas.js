@@ -12,14 +12,14 @@ function Canvas() {
 
   const [currentPoint, setCurrentPoint] = useState({})
 
-  const [stackTypes, setStackTypes] = useState([])
+  const [undoStack, setUndoStack] = useState([])
 
   // Add elements
 
   const addPoint = (x,y) => {
     setPoints([...points, {x,y}])
     setCurrentPoint({})
-    setStackTypes([...stackTypes, "point"])
+    setUndoStack([...undoStack, "point"])
     return {x,y}
   }
 
@@ -29,7 +29,7 @@ function Canvas() {
       p1: {x: currentPoint.x, y: currentPoint.y},
       p2: {x,y}
     }])
-    currentPoint && setStackTypes([...stackTypes, "line"])
+    currentPoint && setUndoStack([...undoStack, "line"])
     return { p1: {x: currentPoint.x, y: currentPoint.y}, p2: {x,y} }
   }
 
@@ -44,7 +44,7 @@ function Canvas() {
   }
 
   const undo = () => {
-    switch (stackTypes[stackTypes.length - 1]) {
+    switch (undoStack[undoStack.length - 1]) {
       case "point":
         removePoint(points[points.length - 1])
         break;
@@ -53,13 +53,16 @@ function Canvas() {
         break;
       default:
     }
+    setUndoStack([...undoStack].slice(0, undoStack.length - 1))
   }
 
   // Event handlers
 
   const handleKeyPress = (e) => {
-    console.log(e.keyCode)
-    e.keyCode === 90 && undo()
+    if (e.keyCode === 90) {
+      !currentPoint.x && undo()
+      setCurrentPoint({})
+    }
   }
 
   const handleClick = (e) => {
