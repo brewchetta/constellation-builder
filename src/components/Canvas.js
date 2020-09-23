@@ -78,9 +78,10 @@ function Canvas() {
   // Event handlers
 
   const getPositionOnCanvas = (e) => {
+    // needs to return the mouse position compared to the position of the canvas on the page
     return {
-      x: e.clientX - canvasEl.current.getBoundingClientRect().left,
-      y: e.clientY - canvasEl.current.getBoundingClientRect().top
+      x: Math.round(e.clientX - canvasEl.current.getBoundingClientRect().left),
+      y: Math.round(e.clientY - canvasEl.current.getBoundingClientRect().top)
     }
   }
 

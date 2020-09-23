@@ -10,6 +10,10 @@ function InfoDisplay() {
 
       <p>Current Point: {currentPoint.x}, {currentPoint.y}</p>
 
+      <h3>Name: {currentPoint.name}</h3>
+
+      <p> Description: {currentPoint.description}</p>
+
     </div>
   )
 }
