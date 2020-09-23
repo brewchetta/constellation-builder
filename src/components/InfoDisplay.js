@@ -1,9 +1,13 @@
 import React, { useState } from 'react'
-import { useSelector } from 'react-redux'
+
+import { useSelector, useDispatch } from 'react-redux'
+import { setCurrentPoint } from '../redux/actions'
 
 function InfoDisplay() {
 
   // State
+
+  const dispatch = useDispatch()
 
   const currentPoint = useSelector(s => s.currentPoint)
 
@@ -19,10 +23,10 @@ function InfoDisplay() {
 
   const handleUnfocus = ({target}) => {
     if (target.id === "info-name") {
-      console.log(target.value)
+      dispatch(setCurrentPoint({...currentPoint, name: target.value}))
       setNameOpen(!nameOpen)
     } else if (target.id === "info-description") {
-      console.log(target.value)
+      dispatch(setCurrentPoint({...currentPoint, description: target.value}))
       setDescOpen(!descOpen)
     }
   }
