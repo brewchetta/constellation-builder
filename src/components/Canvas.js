@@ -33,11 +33,33 @@ function Canvas() {
     return { p1: {x: currentPoint.x, y: currentPoint.y}, p2: {x,y} }
   }
 
+  // Remove elements
+
+  const removePoint = (pointToRemove) => {
+    setPoints([...points].filter(p => p !== pointToRemove))
+  }
+
+  const removeLine = (lineToRemove) => {
+    setLines([...lines].filter(l => l !== lineToRemove))
+  }
+
+  const undo = () => {
+    switch (stackTypes[stackTypes.length - 1]) {
+      case "point":
+        removePoint(points[points.length - 1])
+        break;
+      case "line":
+        removeLine(lines[lines.length - 1])
+        break;
+      default:
+    }
+  }
+
   // Event handlers
 
   const handleKeyPress = (e) => {
     console.log(e.keyCode)
-    e.keyCode == 90 &&
+    e.keyCode === 90 && undo()
   }
 
   const handleClick = (e) => {
