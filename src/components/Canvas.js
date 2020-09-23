@@ -48,13 +48,19 @@ function Canvas() {
     switch (undoStack[undoStack.length - 1]) {
       case "point":
         removePoint(points[points.length - 1])
+        setUndoStack([...undoStack].slice(0, undoStack.length - 1))
         break;
       case "line":
         removeLine(lines[lines.length - 1])
+        setUndoStack([...undoStack].slice(0, undoStack.length - 1))
+        break;
+      case "line && point":
+        removePoint(points[points.length - 1])
+        removeLine(lines[lines.length - 1])
+        setUndoStack([...undoStack].slice(0, undoStack.length - 1))
         break;
       default:
     }
-    setUndoStack([...undoStack].slice(0, undoStack.length - 1))
   }
 
   // Event handlers
@@ -64,6 +70,7 @@ function Canvas() {
       !currentPoint.x && undo()
       setCurrentPoint({})
     }
+    e.keyCode === 88 && console.log(undoStack)
   }
 
   const handleClick = (e) => {
@@ -75,6 +82,8 @@ function Canvas() {
     } else if (!pointNearby && currentPoint.x) {
       addPoint(x,y)
       addLine({x,y})
+      // manually set undoStack since addPoint / addLine overwrite each other
+      setUndoStack([...undoStack, "line && point"])
     }
   }
 
@@ -103,8 +112,6 @@ function Canvas() {
     onClick={handleClick}
     onKeyDown={handleKeyPress}
     tabIndex="0">
-
-      {currentPoint.x ? <span style={{color: 'white'}}>currentPoint: {currentPoint.x}, {currentPoint.y}</span> : null}
 
       {currentPoint.x ? <CurrentPoint currentPoint={currentPoint} /> : null}
 
