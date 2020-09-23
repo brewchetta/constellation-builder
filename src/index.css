@@ -19,10 +19,7 @@ body {
 /* Line */
 
 .line-mid-point {
-  border: solid white 1px;
-  height: 0;
   position: absolute;
-  width: 0;
 }
 
 .line {

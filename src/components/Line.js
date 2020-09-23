@@ -3,7 +3,7 @@ import React from 'react';
 const getWidthFromPoints = (p1,p2) => {
   const distX = p1.x - p2.x
   const distY = p1.y - p2.y
-  return Math.sqrt((distX ** 2) + (distY ** 2))
+  return Math.sqrt((distX ** 2) + (distY ** 2)) - 10
 }
 
 const getMidFromPoints = (p1,p2) => {
