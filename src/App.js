@@ -8,6 +8,10 @@ function App() {
 
       <Canvas />
 
+      <span>Controls: CTRL + Z to undo the last line</span>
+      <span>Controls: CTRL + X to undo the last point</span>
+      <span>Controls: CTRL + C to remove current point</span>
+
     </div>
   );
 }
