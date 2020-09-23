@@ -38,12 +38,12 @@ function Canvas() {
 
 
   const addLine = ({x,y}) => {
-    currentPoint && dispatch(setLines([...lines, {
-      p1: {x: currentPoint.x, y: currentPoint.y},
-      p2: {x,y}
-    }]))
+    currentPoint && dispatch(setLines([...lines, [
+      {x: currentPoint.x, y: currentPoint.y},
+      {x,y}
+    ]]))
     currentPoint && setUndoStack([...undoStack, "line"])
-    return { p1: {x: currentPoint.x, y: currentPoint.y}, p2: {x,y} }
+    return true
   }
 
   // Remove elements
@@ -105,6 +105,9 @@ function Canvas() {
     }
   }
 
+  // TODO: can currently create line duplicates, disallow line duplicates
+  // Possibly change line from having p1, p2 to be an array
+
   const handlePointClick = (point) => {
     const {x,y} = currentPoint
     if (point.x === x && point.y === y) {
@@ -122,7 +125,7 @@ function Canvas() {
   }
 
   const displayLines = () => {
-    return lines.map(line => <Line key={JSON.stringify(line)} p1={line.p1} p2={line.p2} />)
+    return lines.map(line => <Line key={JSON.stringify(line)} line={line} />)
   }
 
   return (
