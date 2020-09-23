@@ -5,7 +5,7 @@ import Line from './Line'
 import Point from './Point'
 
 import { useSelector, useDispatch } from 'react-redux'
-import { setCurrentPoint, clearCurrentPoint } from '../redux/actions'
+import { setCurrentPoint, clearCurrentPoint, setPoints, setLines } from '../redux/actions'
 
 function Canvas() {
 
@@ -17,9 +17,9 @@ function Canvas() {
 
   const minDist = useSelector(s => s.minDist)
 
-  const [points, setPoints] = useState([])
+  const points = useSelector(s => s.points)
 
-  const [lines, setLines] = useState([])
+  const lines = useSelector(s => s.lines)
 
   const [undoStack, setUndoStack] = useState([])
 
@@ -30,7 +30,7 @@ function Canvas() {
   // Add elements
 
   const addPoint = (x,y) => {
-    setPoints([...points, {x,y}])
+    dispatch(setPoints([...points, {x,y}]))
     dispatch(clearCurrentPoint())
     setUndoStack([...undoStack, "point"])
     return {x,y}
@@ -38,10 +38,10 @@ function Canvas() {
 
 
   const addLine = ({x,y}) => {
-    currentPoint && setLines([...lines, {
+    currentPoint && dispatch(setLines([...lines, {
       p1: {x: currentPoint.x, y: currentPoint.y},
       p2: {x,y}
-    }])
+    }]))
     currentPoint && setUndoStack([...undoStack, "line"])
     return { p1: {x: currentPoint.x, y: currentPoint.y}, p2: {x,y} }
   }
@@ -49,11 +49,11 @@ function Canvas() {
   // Remove elements
 
   const removePoint = (pointToRemove) => {
-    setPoints([...points].filter(p => p !== pointToRemove))
+    dispatch(setPoints([...points].filter(p => p !== pointToRemove)))
   }
 
   const removeLine = (lineToRemove) => {
-    setLines([...lines].filter(l => l !== lineToRemove))
+    dispatch(setLines([...lines].filter(l => l !== lineToRemove)))
   }
 
   const undo = () => {
