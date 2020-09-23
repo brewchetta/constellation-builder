@@ -90,7 +90,6 @@ function Canvas() {
       !currentPoint.x && undo()
       dispatch(clearCurrentPoint())
     }
-    e.keyCode === 88 && console.log(undoStack)
   }
 
   const handleClick = (e) => {

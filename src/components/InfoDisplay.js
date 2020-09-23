@@ -29,7 +29,6 @@ function InfoDisplay() {
   const handleSave = () => {
     const newPoints = points.map(p => p === currentPoint ? {...currentPoint, name, description: desc} : p)
     dispatch(setPoints(newPoints))
-    dispatch(clearCurrentPoint())
   }
 
   // Render

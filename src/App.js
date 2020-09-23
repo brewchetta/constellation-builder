@@ -16,11 +16,16 @@ function App() {
   return (
     <div className="App">
 
-
-      <Canvas />
-
       <ControlsDisplay />
-      {currentPoint.x ? <InfoDisplay /> : null}
+
+      <div className="cols-2">
+
+        <Canvas />
+
+        {currentPoint.x ? <InfoDisplay /> : null}
+
+      </div>
+
 
     </div>
   );
