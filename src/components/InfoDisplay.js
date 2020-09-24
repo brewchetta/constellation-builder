@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 
 import { useSelector, useDispatch } from 'react-redux'
-import { clearCurrentPoint, setPoints } from '../redux/actions'
+import { setPoints } from '../redux/actions'
 
 function InfoDisplay() {
 
@@ -34,9 +34,9 @@ function InfoDisplay() {
 
   // TODO: Refactor so points are true object references rather than new object clones
 
-  const connectedPoints = () => {
-    getPointsByLine(filterLinesByPoint(currentPoint)).filter(p => p.x !== currentPoint.x && p.y !== currentPoint.x)
-  }
+  // const connectedPoints = () => {
+  //   getPointsByLine(filterLinesByPoint(currentPoint)).filter(p => p.x !== currentPoint.x && p.y !== currentPoint.x)
+  // }
 
   // Event Handlers
 

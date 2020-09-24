@@ -1,8 +1,8 @@
 import React, { useState, useRef } from 'react'
 
 import CurrentPoint from './CurrentPoint'
-import Line from './Line'
-import Point from './Point'
+import LineDisplay from './LineDisplay'
+import PointDisplay from './PointDisplay'
 
 import { useSelector, useDispatch } from 'react-redux'
 import { setCurrentPoint, clearCurrentPoint, setPoints, setLines } from '../redux/actions'
@@ -22,10 +22,6 @@ function Canvas() {
   const canvasEl = useRef(null)
 
   // Helpers
-
-  const filterLinesByPoint = ({x,y}) => {
-    return lines.filter(li => (li[0].x === x && li[0].y === y) || (li[1].x === x && li[1].y === y))
-  }
 
   const findLine = (p1,p2) => {
     return lines.find(li => {
@@ -47,7 +43,6 @@ function Canvas() {
   }
 
   const addLine = ({x,y}) => {
-    const found = findLine(currentPoint, {x,y})
     if (!findLine(currentPoint, {x,y})) {
       currentPoint && dispatch(setLines([...lines, [
         {x: currentPoint.x, y: currentPoint.y},
@@ -134,11 +129,11 @@ function Canvas() {
   // Render components
 
   const displayPoints = () => {
-    return points.map((point,i) => <Point key={i} handlePointClick={handlePointClick} point={point} />)
+    return points.map((point,i) => <PointDisplay key={i} handlePointClick={handlePointClick} point={point} />)
   }
 
   const displayLines = () => {
-    return lines.map(line => <Line key={JSON.stringify(line)} line={line} />)
+    return lines.map(line => <LineDisplay key={JSON.stringify(line)} line={line} />)
   }
 
   return (
