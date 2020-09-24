@@ -9,9 +9,7 @@ function InfoDisplay() {
 
   const dispatch = useDispatch()
 
-  const currentPoint = useSelector(s => s.currentPoint)
-
-  const points = useSelector(s => s.points)
+  const [points, lines, currentPoint] = useSelector(s => [s.points, s.lines, s.currentPoint])
 
   const [name, setName] = useState(currentPoint.name || "")
 
@@ -23,6 +21,16 @@ function InfoDisplay() {
     setName(currentPoint.name || "")
     setDesc(currentPoint.description || "")
   }, [currentPoint])
+
+  // Helpers
+
+  const filterLinesByPoint = ({x,y}) => {
+    return lines.filter(li => (li[0].x === x && li[0].y === y) || (li[1].x === x && li[1].y === y))
+  }
+
+  const getPointsByLine = (line) => {
+    return points.filter(p => line.find(lp => lp.x === p.x && lp.y === p.y))
+  }
 
   // Event Handlers
 

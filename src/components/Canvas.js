@@ -13,13 +13,7 @@ function Canvas() {
 
   const dispatch = useDispatch()
 
-  const currentPoint = useSelector(s => s.currentPoint)
-
-  const minDist = useSelector(s => s.minDist)
-
-  const points = useSelector(s => s.points)
-
-  const lines = useSelector(s => s.lines)
+  const [currentPoint, minDist, points, lines] = useSelector(s => [s.currentPoint, s.minDist, s.points, s.lines])
 
   const [undoStack, setUndoStack] = useState([])
 
