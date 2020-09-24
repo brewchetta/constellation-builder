@@ -29,6 +29,15 @@ function Canvas() {
 
   // Add elements
 
+  const findLine = (p1,p2) => {
+    const p1String = JSON.stringify(p1)
+    const p2String = JSON.stringify(p2)
+    return lines.find(li => {
+      const liString = JSON.stringify(li)
+      return liString.includes(p1String) && liString.includes(p2String)
+    })
+  }
+
   const addPoint = (x,y) => {
     dispatch(setPoints([...points, {x,y}]))
     dispatch(clearCurrentPoint())
@@ -36,14 +45,16 @@ function Canvas() {
     return {x,y}
   }
 
-
   const addLine = ({x,y}) => {
-    currentPoint && dispatch(setLines([...lines, [
-      {x: currentPoint.x, y: currentPoint.y},
-      {x,y}
-    ]]))
-    currentPoint && setUndoStack([...undoStack, "line"])
+    if (!findLine(currentPoint, {x,y})) {
+      currentPoint && dispatch(setLines([...lines, [
+        {x: currentPoint.x, y: currentPoint.y},
+        {x,y}
+      ]]))
+      currentPoint && setUndoStack([...undoStack, "line"])
+    }
     return true
+    // true to continue right hand operators
   }
 
   // Remove elements
