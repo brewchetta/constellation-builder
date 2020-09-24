@@ -9,13 +9,36 @@
 
 .cols-2 {
   display: grid;
-  grid-template-columns: 1fr 0.5fr;
+  grid-template-columns: 1fr 300px;
 }
 
 /* Info Display */
 
 #info-display {
+  border: solid black 2px;
+  font-family: 'Fira Mono', monospace;
+  padding: 1em;
   position: relative;
+}
+
+#info-name, #info-description {
+  border: none;
+  font-family: 'Fira Mono', monospace;
+  margin-top: 1em;
+  padding: 2px;
+}
+
+#info-name {
+  font-size: 1.2em;
+}
+
+#info-description {
+  font-size: 0.9em;
+}
+
+#info-name:focus, #info-description:focus {
+  border: black solid 2px;
+  padding: 0;
 }
 
 /* Canvas */

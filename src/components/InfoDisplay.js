@@ -36,17 +36,17 @@ function InfoDisplay() {
   return (
     <div id="info-display">
 
-      <p id="info-point">Current Point: {currentPoint.x}, {currentPoint.y}</p>
-
-      <input id="info-name"
+      <input id="info-name" placeholder="add a star name here"
         onChange={(e) => setName(e.target.value)}
         type="text" value={name} />
 
-      <textarea id="info-description"
+      <textarea id="info-description" placeholder = "add a star description here"
         onChange={(e) => setDesc(e.target.value)}
         value={desc} />
 
       <button type="button" onClick={handleSave}>Save</button>
+
+      <p id="info-point">x{currentPoint.x}, y{currentPoint.y}</p>
 
     </div>
   )
