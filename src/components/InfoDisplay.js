@@ -26,7 +26,8 @@ function InfoDisplay() {
 
   // Event Handlers
 
-  const handleSave = () => {
+  const handleSave = (e) => {
+    e.preventDefault()
     const newPoints = points.map(p => p === currentPoint ? {...currentPoint, name, description: desc} : p)
     dispatch(setPoints(newPoints))
   }
@@ -34,7 +35,7 @@ function InfoDisplay() {
   // Render
 
   return (
-    <div id="info-display">
+    <form id="info-display">
 
       <input id="info-name" placeholder="add a star name here"
         onChange={(e) => setName(e.target.value)}
@@ -44,11 +45,11 @@ function InfoDisplay() {
         onChange={(e) => setDesc(e.target.value)}
         value={desc} />
 
-      <button type="button" onClick={handleSave}>Save</button>
+      <input type="submit" onClick={handleSave} value="Save" />
 
       <p id="info-point">x{currentPoint.x}, y{currentPoint.y}</p>
 
-    </div>
+    </form>
   )
 }
 
