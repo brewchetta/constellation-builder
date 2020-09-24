@@ -27,7 +27,11 @@ function Canvas() {
 
   const canvasEl = useRef(null)
 
-  // Add elements
+  // Helpers
+
+  const filterLinesByPoint = ({x,y}) => {
+    return lines.filter(li => (li[0].x === x && li[0].y === y) || (li[1].x === x && li[1].y === y))
+  }
 
   const findLine = (p1,p2) => {
     return lines.find(li => {
@@ -38,6 +42,8 @@ function Canvas() {
       return liString.includes(p1String) && liString.includes(p2String)
     })
   }
+
+  // Add elements
 
   const addPoint = (x,y) => {
     dispatch(setPoints([...points, {x,y}]))
