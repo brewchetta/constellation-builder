@@ -30,11 +30,9 @@ function Canvas() {
   // Add elements
 
   const findLine = (p1,p2) => {
-    const p1String = JSON.stringify(p1)
-    const p2String = JSON.stringify(p2)
     return lines.find(li => {
       const liString = JSON.stringify(li)
-      return liString.includes(p1String) && liString.includes(p2String)
+      return liString.includes(JSON.stringify(p1)) && liString.includes(JSON.stringify(p2))
     })
   }
 
