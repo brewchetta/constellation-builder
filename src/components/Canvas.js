@@ -32,7 +32,10 @@ function Canvas() {
   const findLine = (p1,p2) => {
     return lines.find(li => {
       const liString = JSON.stringify(li)
-      return liString.includes(JSON.stringify(p1)) && liString.includes(JSON.stringify(p2))
+      const p1String = JSON.stringify({x: p1.x, y: p1.y})
+      const p2String = JSON.stringify({x: p2.x, y: p2.y})
+      console.log (p1String, p2String, liString)
+      return liString.includes(p1String) && liString.includes(p2String)
     })
   }
 
@@ -44,6 +47,7 @@ function Canvas() {
   }
 
   const addLine = ({x,y}) => {
+    const found = findLine(currentPoint, {x,y})
     if (!findLine(currentPoint, {x,y})) {
       currentPoint && dispatch(setLines([...lines, [
         {x: currentPoint.x, y: currentPoint.y},
