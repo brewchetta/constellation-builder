@@ -1,19 +1,17 @@
 import React, { useState, useEffect } from 'react'
 
-import { useSelector, useDispatch } from 'react-redux'
-import { setPoints } from '../redux/actions'
+import { useSelector } from 'react-redux'
+// import { setPoints } from '../redux/actions'
 
 function InfoDisplay() {
 
   // State
 
-  const dispatch = useDispatch()
-
-  const [points, lines, currentPoint] = useSelector(s => [s.points, s.lines, s.currentPoint])
+  const currentPoint = useSelector(s => s.currentPoint)
 
   const [name, setName] = useState(currentPoint.name || "")
 
-  const [desc, setDesc] = useState(currentPoint.description || "")
+  const [description, setDesc] = useState(currentPoint.description || "")
 
   // Effects
 
@@ -26,8 +24,8 @@ function InfoDisplay() {
 
   const handleSave = (e) => {
     e.preventDefault()
-    const newPoints = points.map(p => p === currentPoint ? {...currentPoint, name, description: desc} : p)
-    dispatch(setPoints(newPoints))
+    currentPoint.name = name
+    currentPoint.description = description
   }
 
   // Render
@@ -41,7 +39,7 @@ function InfoDisplay() {
 
       <textarea id="info-description" placeholder = "add a star description here"
         onChange={(e) => setDesc(e.target.value)}
-        value={desc} />
+        value={description} />
 
       <input type="submit" onClick={handleSave} value="Save" />
 
