@@ -78,6 +78,10 @@ function Canvas() {
       !currentPoint.x && undo()
       dispatch(clearCurrentPoint())
     }
+    // code 88 = x
+    if (e.keyCode === 88) {
+      dispatch(clearCurrentPoint())
+    }
   }
 
   const handleClick = (e) => {
@@ -89,7 +93,9 @@ function Canvas() {
     if (!pointNearby && !currentPoint.x) {
       addPoint({x,y})
     } else if (!pointNearby && currentPoint.x) {
-      addLine(addPoint({x,y}))
+      const newPoint = addPoint({x,y})
+      addLine(newPoint)
+      dispatch(setCurrentPoint(newPoint))
       // manually set undoStack since addPoint / addLine overwrite each other
       setUndoStack([...undoStack, "line && point"])
     }
