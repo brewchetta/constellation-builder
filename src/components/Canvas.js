@@ -20,6 +20,8 @@ function Canvas() {
 
   const [undoStack, setUndoStack] = useState([])
 
+  const [unfocused, setUnfocused] = useState(false)
+
   // Refs
 
   const canvasEl = useRef(null)
@@ -81,6 +83,9 @@ function Canvas() {
   }
 
   const handleClick = (e) => {
+    if (unfocused) {
+      return setUnfocused(false)
+    }
     const {x,y} = getPositionOnCanvas(e)
     const pointNearby = Point.nearbyPoints({x,y})
     if (!pointNearby && !currentPoint.x) {
@@ -102,6 +107,8 @@ function Canvas() {
     }
   }
 
+  const handleBlur = () => setUnfocused(true)
+
   // Render components
 
   const displayPoints = () => {
@@ -117,7 +124,8 @@ function Canvas() {
     onClick={handleClick}
     onKeyDown={handleKeyPress}
     ref={canvasEl}
-    tabIndex="0">
+    tabIndex="0"
+    onBlur={handleBlur}>
 
       {currentPoint.x ? <CurrentPoint currentPoint={currentPoint} /> : null}
 
