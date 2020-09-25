@@ -44,11 +44,15 @@
 /* Canvas */
 
 #canvas {
-  background: black;
+  background: #222;
   border: solid #ADD8E6 2px;
   height: 500px;
   position: relative;
   width: 500px;
+}
+
+#canvas:focus {
+  background: #111;
 }
 
 /* Line */
