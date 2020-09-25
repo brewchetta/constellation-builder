@@ -1,4 +1,6 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
+
+import Line from '../classes/Line'
 
 import CurrentPoint from './CurrentPoint'
 import LineDisplay from './LineDisplay'
@@ -8,6 +10,19 @@ import { useSelector, useDispatch } from 'react-redux'
 import { setCurrentPoint, clearCurrentPoint, setPoints, setLines } from '../redux/actions'
 
 function Canvas() {
+
+  // Redux has been instituted, currently when rendering lines there is an infinite loop due to this line
+  useEffect(() => {
+    let l1
+    if (lines.length < 5) {
+      l1 = new Line([{x: 100, y: 100}, {x:100, y:200}])
+    }
+    console.log("from lines: ", Line.all())
+    console.log(l1 && l1.constructor.name)
+    console.log("from canvas: ", lines)
+  })
+
+
 
   // State
 
@@ -146,7 +161,7 @@ function Canvas() {
       {currentPoint.x ? <CurrentPoint currentPoint={currentPoint} /> : null}
 
       {displayPoints()}
-      {displayLines()}
+      {/* displayLines() */}
 
     </div>
   )
