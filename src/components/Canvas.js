@@ -75,8 +75,8 @@ function Canvas() {
   const handleKeyPress = (e) => {
     // code 90 = CTRL + Z
     if (e.keyCode === 90) {
-      !currentPoint.x && undo()
-      dispatch(clearCurrentPoint())
+      currentPoint === points[points.length - 1] && dispatch(clearCurrentPoint())
+      undo()
     }
     // code 88 = x
     if (e.keyCode === 88) {
