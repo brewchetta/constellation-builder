@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react'
 
-import { useSelector } from 'react-redux'
-// import { setPoints } from '../redux/actions'
+import { useSelector, useDispatch } from 'react-redux'
+import { setCurrentPoint } from '../redux/actions'
 
 function InfoDisplay() {
 
   // State
+
+  const dispatch = useDispatch()
 
   const currentPoint = useSelector(s => s.currentPoint)
 
@@ -22,19 +24,26 @@ function InfoDisplay() {
 
   // Event Handlers
 
-  const handleSave = (e) => {
+  const handleSave = e => {
     e.preventDefault()
     currentPoint.name = name
     currentPoint.description = description
   }
 
-  const renderConnectedPoints = () => {
-    return currentPoint.connectedPoints().map(p => {
-      return <li>{ p.name ? p.name : `${p.x},${p.y}` }</li>
-    });
-  }
+  const handleConnectClick = point => dispatch(setCurrentPoint(point))
 
   // Render
+
+  const renderConnectedPoints = () => {
+    return currentPoint.connectedPoints().map(p => {
+      return (
+        <li key={`connection ${p.x} ${p.y}`}
+          className="info-connection"
+          onClick={() => handleConnectClick(p)}
+          >{ p.name ? p.name : `${p.x},${p.y}` }</li>
+      )
+    });
+  }
 
   return (
     <form id="info-display">

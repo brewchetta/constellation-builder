@@ -14,6 +14,14 @@
 
 /* Info Display */
 
+.info-connection {
+  cursor: pointer;
+}
+
+#info-description {
+  font-size: 0.9em;
+}
+
 #info-display {
   border: solid black 2px;
   font-family: 'Fira Mono', monospace;
@@ -21,22 +29,18 @@
   position: relative;
 }
 
-#info-name, #info-description {
+#info-name {
+  font-size: 1.2em;
+}
+
+#info-description, #info-name {
   border: none;
   font-family: 'Fira Mono', monospace;
   margin-top: 1em;
   padding: 2px;
 }
 
-#info-name {
-  font-size: 1.2em;
-}
-
-#info-description {
-  font-size: 0.9em;
-}
-
-#info-name:focus, #info-description:focus {
+#info-description:focus, #info-name:focus {
   border: black solid 2px;
   padding: 0;
 }
