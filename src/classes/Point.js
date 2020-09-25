@@ -3,6 +3,8 @@ import { setPoints } from '../redux/actions'
 
 store.subscribe(() => console.log(store.getState()))
 
+const minDist = 20
+
 export default class Point {
   constructor({x, y, name, description}) {
     this.x = x
@@ -20,4 +22,15 @@ export default class Point {
     const points = this.all()
     store.dispatch(setPoints(points.slice(0, points.length - 1))
   }
+
+  static findByCoordinates = ({x,y}) => {
+    this.all().find(p => p.x === x && p.y == y)
+  }
+
+  // Instance
+
+  nearbyPoints = ({x,y}) => {
+    Point.find(p => Math.abs(p.x - x) < minDist && Math.abs(p.y - y) < minDist)
+  }
+
 }
