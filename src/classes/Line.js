@@ -7,10 +7,10 @@ store.subscribe(() => console.log(store.getState()))
 export default class Line {
   constructor(points) {
     this.points = points
-    store.dispatch(setLines([...Line.getLines(), this]))
+    store.dispatch(setLines([...Line.all(), this]))
   }
 
-  static getLines = () => store.getState().lines
+  static all = () => store.getState().lines
 
   midPoint = () => {
     const x = Math.abs(this.points[0].x - this.points[1].x) / 2 + Math.min(this.points[0].x, this.points[1].x)
