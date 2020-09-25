@@ -33,4 +33,6 @@ export default class Point {
 
   connectedPoints = () => this.lines().map(line => line.points.find(p => p !== this))
 
+  isConnectionHover = () => store.getState().connectionHover === this
+
 }

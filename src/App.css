@@ -100,11 +100,17 @@
 
 #selected-point-display {
   animation: rotate 2s infinite linear;
-  border: dashed white 1px;
-  border-radius: 100%;
+  border: solid white 1px;
+  /* border-radius: 100%; */
   height: 12px;
   left: -7px;
   position: absolute;
   top: -7px;
   width: 12px;
+}
+
+/* Hovered Point Connection */
+
+#hover-connection {
+  border-color: #fdfd96;
 }

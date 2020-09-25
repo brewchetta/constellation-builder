@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 
 import { useSelector, useDispatch } from 'react-redux'
-import { setCurrentPoint } from '../redux/actions'
+import { setCurrentPoint, setConnectionHover, clearConnectionHover } from '../redux/actions'
 
 function InfoDisplay() {
 
@@ -20,6 +20,7 @@ function InfoDisplay() {
   useEffect(() => {
     setName(currentPoint.name || "")
     setDesc(currentPoint.description || "")
+    dispatch(clearConnectionHover())
   }, [currentPoint])
 
   // Event Handlers
@@ -39,6 +40,8 @@ function InfoDisplay() {
       return (
         <li key={`connection ${p.x} ${p.y}`}
           className="info-connection"
+          onMouseEnter={() => dispatch(setConnectionHover(p))}
+          onMouseLeave={() => dispatch(clearConnectionHover())}
           onClick={() => handleConnectClick(p)}
           >{ p.name ? p.name : `${p.x},${p.y}` }</li>
       )
