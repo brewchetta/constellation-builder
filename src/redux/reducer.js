@@ -1,4 +1,7 @@
+import { createStore } from 'redux'
+
 import { SET_CURRENT_POINT, CLEAR_CURRENT_POINT, SET_LINES, SET_POINTS } from './actionTypes'
+
 
 const initialState = {
   currentPoint: {},
@@ -7,7 +10,7 @@ const initialState = {
   minDist: 20
 }
 
-export default function(state = initialState, action) {
+function reducer(state = initialState, action) {
   switch (action.type) {
     case SET_CURRENT_POINT:
       return {...state, currentPoint: action.payload}
@@ -21,3 +24,5 @@ export default function(state = initialState, action) {
       return state
   }
 }
+
+export default createStore(reducer)
