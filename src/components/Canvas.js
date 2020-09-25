@@ -29,7 +29,6 @@ function Canvas() {
   // Add elements
 
   const addPoint = ({x,y}) => {
-    console.log("inside new point")
     setUndoStack([...undoStack, "point"])
     return new Point({x,y})
   }
@@ -88,7 +87,7 @@ function Canvas() {
     const {x,y} = getPositionOnCanvas(e)
     const pointNearby = Point.nearbyPoints({x,y})
     if (!pointNearby && !currentPoint.x) {
-      new Point({x,y})
+      addPoint({x,y})
     } else if (!pointNearby && currentPoint.x) {
       addPoint({x,y})
       addLine({x,y})
