@@ -12,5 +12,12 @@ export default class Point {
     store.dispatch(setPoints([...Point.all(), this]))
   }
 
+  // Static
+
   static all = () => store.getState().points
+
+  static undo = () => {
+    const points = this.all()
+    store.dispatch(setPoints(points.slice(0, points.length - 1))
+  }
 }

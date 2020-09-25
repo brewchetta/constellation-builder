@@ -17,6 +17,11 @@ export default class Line {
     return Line.all().find(line => line.points.includes(p1) && line.points.includes(p2))
   }
 
+  static undo = () => {
+    const lines = this.all()
+    store.dispatch(setLines(lines.slice(0, lines.length - 1))
+  }
+
   // Instance
 
   midPoint = () => {
