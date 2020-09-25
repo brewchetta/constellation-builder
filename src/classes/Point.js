@@ -31,4 +31,6 @@ export default class Point {
 
   lines = () => store.getState().lines.filter(line => line.points.includes(this))
 
+  connectedPoints = () => this.lines().map(line => line.points.find(p => p !== this))
+
 }

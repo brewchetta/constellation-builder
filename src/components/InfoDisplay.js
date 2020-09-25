@@ -28,6 +28,12 @@ function InfoDisplay() {
     currentPoint.description = description
   }
 
+  const renderConnectedPoints = () => {
+    return currentPoint.connectedPoints().map(p => {
+      return <li>{ p.name ? p.name : `${p.x},${p.y}` }</li>
+    });
+  }
+
   // Render
 
   return (
@@ -44,6 +50,14 @@ function InfoDisplay() {
       <input type="submit" onClick={handleSave} value="Save" />
 
       <p id="info-point">x{currentPoint.x}, y{currentPoint.y}</p>
+
+      <p>Connections: </p>
+
+      <ul>
+
+        {renderConnectedPoints()}
+
+      </ul>
 
     </form>
   )
