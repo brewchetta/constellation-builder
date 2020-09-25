@@ -27,4 +27,10 @@ export default class Point {
     return this.all().find(p => Math.abs(p.x - x) < minDist && Math.abs(p.y - y) < minDist)
   }
 
+  // Instance
+
+  lines = () => {
+    store.getState().lines.filter(line => line.points.includes(this))
+  }
+
 }
