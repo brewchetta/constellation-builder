@@ -29,8 +29,6 @@ export default class Point {
 
   // Instance
 
-  lines = () => {
-    store.getState().lines.filter(line => line.points.includes(this))
-  }
+  lines = () => store.getState().lines.filter(line => line.points.includes(this))
 
 }

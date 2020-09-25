@@ -36,7 +36,6 @@ function Canvas() {
 
   const addLine = (point) => {
     if (currentPoint && !Line.findByPoints(point, currentPoint)) {
-      console.log("adding a new line")
       setUndoStack([...undoStack, "line"])
       return new Line([point, currentPoint])
     }
