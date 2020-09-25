@@ -12,7 +12,8 @@ export default class Line {
   static all = () => store.getState().lines
 
   static findByPoints = (p1,p2) => {
-    return Line.all().find(line => line.points.includes(p1) && line.points.includes(p2))
+    const line = Line.all().find(line => line.points.includes(p1) && line.points.includes(p2))
+    return line
   }
 
   static undo = () => {

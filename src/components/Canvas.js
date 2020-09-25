@@ -89,8 +89,7 @@ function Canvas() {
     if (!pointNearby && !currentPoint.x) {
       addPoint({x,y})
     } else if (!pointNearby && currentPoint.x) {
-      addPoint({x,y})
-      addLine({x,y})
+      addLine(addPoint({x,y}))
       // manually set undoStack since addPoint / addLine overwrite each other
       setUndoStack([...undoStack, "line && point"])
     }
