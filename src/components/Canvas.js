@@ -11,7 +11,7 @@ import { setCurrentPoint, clearCurrentPoint, setPoints, setLines } from '../redu
 
 function Canvas() {
 
-  // Redux has been instituted, currently when rendering lines there is an infinite loop due to this line
+  // Redux has been instituted, currently need to change how lines are created and accessed here
   useEffect(() => {
     let l1
     if (lines.length < 5) {
