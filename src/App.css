@@ -1,3 +1,7 @@
+body {
+  padding: 1em;
+}
+
 /* Keyframes */
 
 @keyframes rotate {
@@ -9,7 +13,7 @@
 
 .cols-2 {
   display: grid;
-  grid-template-columns: 1fr 300px;
+  grid-template-columns: 1fr 0.5fr;
 }
 
 /* Info Display */
@@ -50,9 +54,10 @@
 #canvas {
   background: #222;
   border: solid #ADD8E6 2px;
-  height: 500px;
+  height: 90vh;
+  overflow: hidden;
   position: relative;
-  width: 500px;
+  width: 60vw;
 }
 
 #canvas:focus {

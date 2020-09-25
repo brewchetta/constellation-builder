@@ -1,12 +1,10 @@
-import React, { useState } from 'react'
+import React from 'react'
 
 function ControlsDisplay() {
 
-  const [open, setOpen] = useState(false)
-
-  const openedControls = () => (
-    <>
-      <span>Controls (click to close):</span>
+  return (
+    <div>
+      <span>Controls:</span>
       <br/>
       <br/>
 
@@ -18,17 +16,13 @@ function ControlsDisplay() {
       <br/>
       <br/>
 
-      <span>CTRL + Z to undo the last line or deselect the currently selected point</span>
+      <span>CTRL + Z to undo the last line</span>
       <br/>
       <br/>
-    </>
-  )
 
-  const closedControls = () => <span>Controls (click to open)</span>
-
-  return (
-    <div onClick={() => setOpen(!open)}>
-      {open ? openedControls() : closedControls()}
+      <span>X to deselect current point</span>
+      <br/>
+      <br/>
     </div>
   )
 }

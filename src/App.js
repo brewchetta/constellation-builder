@@ -16,13 +16,11 @@ function App() {
   return (
     <div className="App">
 
-      <ControlsDisplay />
-
       <div className="cols-2">
 
         <Canvas />
 
-        {currentPoint.x ? <InfoDisplay /> : null}
+        {currentPoint.x ? <InfoDisplay /> : <ControlsDisplay />}
 
       </div>
 
