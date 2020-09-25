@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useState, useRef } from 'react'
 
 import Line from '../classes/Line'
 import Point from '../classes/Point'
@@ -8,7 +8,7 @@ import LineDisplay from './LineDisplay'
 import PointDisplay from './PointDisplay'
 
 import { useSelector, useDispatch } from 'react-redux'
-import { setCurrentPoint, clearCurrentPoint, setPoints, setLines } from '../redux/actions'
+import { setCurrentPoint, clearCurrentPoint } from '../redux/actions'
 
 function Canvas() {
 
@@ -16,7 +16,7 @@ function Canvas() {
 
   const dispatch = useDispatch()
 
-  const [currentPoint, minDist, points, lines] = useSelector(s => [s.currentPoint, s.minDist, s.points, s.lines])
+  const [currentPoint, points, lines] = useSelector(s => [s.currentPoint, s.points, s.lines])
 
   const [undoStack, setUndoStack] = useState([])
 
@@ -27,13 +27,12 @@ function Canvas() {
   // Add elements
 
   const addPoint = ({x,y}) => {
+    console.log("inside new point")
     setUndoStack([...undoStack, "point"])
     return new Point({x,y})
   }
 
   const addLine = (point) => {
-    // takes in a real point, not object
-    // find a line with point, if not add line from point and currentPoint
     if (currentPoint && !Line.findByPoints(point, currentPoint)) {
       console.log("adding a new line")
       setUndoStack([...undoStack, "line"])
@@ -106,11 +105,11 @@ function Canvas() {
   // Render components
 
   const displayPoints = () => {
-    return Point.all().map((point,i) => <PointDisplay key={i} handlePointClick={handlePointClick} point={point} />)
+    return points.map((point,i) => <PointDisplay key={i} handlePointClick={handlePointClick} point={point} />)
   }
 
   const displayLines = () => {
-    return Line.all().map(line => <LineDisplay key={JSON.stringify(line)} line={line} />)
+    return lines.map(line => <LineDisplay key={JSON.stringify(line)} line={line} />)
   }
 
   return (

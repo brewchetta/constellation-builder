@@ -1,8 +1,6 @@
 import store from '../redux/reducer'
 import { setPoints } from '../redux/actions'
 
-store.subscribe(() => console.log(store.getState()))
-
 const minDist = 20
 
 export default class Point {
@@ -20,17 +18,13 @@ export default class Point {
 
   static undo = () => {
     const points = this.all()
-    store.dispatch(setPoints(points.slice(0, points.length - 1))
+    store.dispatch(setPoints(points.slice(0, points.length - 1)))
   }
 
-  static findByCoordinates = ({x,y}) => {
-    this.all().find(p => p.x === x && p.y == y)
-  }
+  static findByCoordinates = ({x,y}) => this.all().find(p => p.x === x && p.y === y)
 
-  // Instance
-
-  nearbyPoints = ({x,y}) => {
-    Point.find(p => Math.abs(p.x - x) < minDist && Math.abs(p.y - y) < minDist)
+  static nearbyPoints = ({x,y}) => {
+    return this.all().find(p => Math.abs(p.x - x) < minDist && Math.abs(p.y - y) < minDist)
   }
 
 }

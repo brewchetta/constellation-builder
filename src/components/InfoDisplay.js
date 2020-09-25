@@ -22,22 +22,6 @@ function InfoDisplay() {
     setDesc(currentPoint.description || "")
   }, [currentPoint])
 
-  // Helpers
-
-  const filterLinesByPoint = ({x,y}) => {
-    return lines.filter(li => (li[0].x === x && li[0].y === y) || (li[1].x === x && li[1].y === y))
-  }
-
-  const getPointsByLine = (line) => {
-    return points.filter(p => line.find(lp => lp.x === p.x && lp.y === p.y))
-  }
-
-  // TODO: Refactor so points are true object references rather than new object clones
-
-  // const connectedPoints = () => {
-  //   getPointsByLine(filterLinesByPoint(currentPoint)).filter(p => p.x !== currentPoint.x && p.y !== currentPoint.x)
-  // }
-
   // Event Handlers
 
   const handleSave = (e) => {
@@ -45,8 +29,6 @@ function InfoDisplay() {
     const newPoints = points.map(p => p === currentPoint ? {...currentPoint, name, description: desc} : p)
     dispatch(setPoints(newPoints))
   }
-
-  console.log(getPointsByLine(filterLinesByPoint(currentPoint)))
 
   // Render
 

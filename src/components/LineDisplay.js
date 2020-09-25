@@ -1,7 +1,5 @@
 import React from 'react';
 
-import Line from '../classes/Line'
-
 function LineDisplay({line}) {
 
   const width = line.width()
@@ -16,4 +14,4 @@ function LineDisplay({line}) {
 
 }
 
-export default Line
+export default LineDisplay

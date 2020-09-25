@@ -1,8 +1,6 @@
 import store from '../redux/reducer'
 import { setLines } from '../redux/actions'
 
-store.subscribe(() => console.log(store.getState()))
-
 export default class Line {
   constructor(points) {
     this.points = points
@@ -19,7 +17,7 @@ export default class Line {
 
   static undo = () => {
     const lines = this.all()
-    store.dispatch(setLines(lines.slice(0, lines.length - 1))
+    store.dispatch(setLines(lines.slice(0, lines.length - 1)))
   }
 
   // Instance
