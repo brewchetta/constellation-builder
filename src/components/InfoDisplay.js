@@ -21,6 +21,7 @@ function InfoDisplay() {
     setName(currentPoint.name || "")
     setDesc(currentPoint.description || "")
     dispatch(clearConnectionHover())
+    // eslint-disable-next-line
   }, [currentPoint])
 
   // Event Handlers
