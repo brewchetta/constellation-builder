@@ -90,7 +90,6 @@ function Canvas() {
     }
     const {x,y} = getPositionOnCanvas(e)
     const pointNearby = Point.nearbyPoints({x,y})
-    console.log("clicked")
     if (!pointNearby && !currentPoint.x) {
       addPoint({x,y})
     } else if (!pointNearby && currentPoint.x) {
@@ -99,14 +98,12 @@ function Canvas() {
       dispatch(setCurrentPoint(newPoint))
       // manually set undoStack since addPoint / addLine overwrite each other
       setUndoStack([...undoStack, "line && point"])
-    } else if (pointNearby && currentPoint.x) {
-      dispatch(clearCurrentPoint())
     }
   }
 
   const handlePointClick = (point) => {
     if (point === currentPoint) {
-      setCurrentPoint({})
+      dispatch(setCurrentPoint({}))
     } else {
       !currentPoint.x && dispatch(setCurrentPoint(point))
       currentPoint.x && addLine(point) && dispatch(setCurrentPoint(point))
